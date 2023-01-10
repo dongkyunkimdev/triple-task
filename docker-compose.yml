@@ -15,3 +15,13 @@ services:
       - 3306:3306
     volumes:
       - ./db/mysql/data:/var/lib/mysql
+
+  triple-service:
+    build: .
+    ports:
+      - 8080:8080
+    restart: on-failure
+    environment:
+      TRIPLE_DB_CONNECTION_URI: "jdbc:mysql://triple-db:3306/triple?serverTimezone=Asia/Seoul&characterEncoding=UTF-8"
+    depends_on:
+      - triple-db
