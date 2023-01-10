@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: ${TRIPLE_DB_CONNECTION_URI:jdbc:mysql://localhost:3306/triple?serverTimezone=Asia/Seoul&characterEncoding=UTF-8}
+    username: root
+    password: password
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
