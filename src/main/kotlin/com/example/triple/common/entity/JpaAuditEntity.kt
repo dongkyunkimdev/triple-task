@@ -10,7 +10,7 @@ import javax.persistence.MappedSuperclass
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener::class)
-abstract class JpaAuditEntity {
+abstract class JpaAuditEntity : PrimaryKeyEntity() {
     @CreatedDate
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.MIN
