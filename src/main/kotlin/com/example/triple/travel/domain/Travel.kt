@@ -26,14 +26,18 @@ class Travel(
         protected set
 
     init {
-        require(LocalDateTime.now().isBefore(endedAt) && startedAt.isBefore(endedAt)) {
-            "The end date of the trip must be a future date"
+        require(LocalDateTime.now().isBefore(endedAt)) {
+            "End date must be after the current date"
+        }
+        require(startedAt.isBefore(endedAt)){
+            "The end date must be after the start date"
         }
     }
 
     fun update(command: UpdateTravelService.UpdateTravelCommand, city: City) {
-        if (LocalDateTime.now().isBefore(command.endedAt) && command.startedAt.isBefore(command.endedAt)) {
-            throw IllegalArgumentException("The end date of the trip must be a future date")
+        when {
+            command.endedAt.isBefore(LocalDateTime.now()) -> throw IllegalArgumentException("End date must be after the current date")
+            command.endedAt.isBefore(command.startedAt) -> throw IllegalArgumentException("The end date must be after the start date")
         }
         this.city = city
         startedAt = command.startedAt
