@@ -29,7 +29,7 @@ class Travel(
         require(LocalDateTime.now().isBefore(endedAt)) {
             "End date must be after the current date"
         }
-        require(startedAt.isBefore(endedAt)){
+        require(startedAt.isBefore(endedAt)) {
             "The end date must be after the start date"
         }
     }

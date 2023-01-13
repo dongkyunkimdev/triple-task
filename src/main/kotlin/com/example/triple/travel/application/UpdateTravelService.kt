@@ -20,7 +20,6 @@ class UpdateTravelService(
         savedTravel ?: throw TravelNotFoundException(command.id)
         val savedCity = cityPersistencePort.findCityById(command.cityId)
         savedCity ?: throw CityNotFoundException(command.cityId)
-
         savedTravel.update(command, savedCity)
 
         return UpdateTravelInfo.from(savedTravel)

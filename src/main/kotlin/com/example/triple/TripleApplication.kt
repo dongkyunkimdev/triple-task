@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class TripleApplication
 
 fun main(args: Array<String>) {
-	runApplication<TripleApplication>(*args)
+    runApplication<TripleApplication>(*args)
 }
