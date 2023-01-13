@@ -3,8 +3,10 @@ package com.example.triple.travel.application
 import com.example.triple.city.application.CityPersistencePort
 import com.example.triple.city.domain.City
 import com.example.triple.travel.application.exception.CityNotFoundException
+import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
 import java.time.LocalDateTime
@@ -41,6 +43,18 @@ class RegisterTravelServiceDescribeSpec : DescribeSpec({
                     }
                 }
             }
+
+            context("종료일시가 현재 일시의 이후이고, 출발일시가 종료일시 이전인 command가 주어지면") {
+                it("여행 등록에 성공하고 RegisterTravelInfo 응답") {
+                    val info = registerTravelService.command(correctCommand)
+
+                    assertSoftly {
+                        info.cityInfo.id shouldBe correctCommand.cityId
+                        info.startedAt shouldBe correctCommand.startedAt
+                        info.endedAt shouldBe correctCommand.endedAt
+                    }
+                }
+            }
         }
     }
 
@@ -62,6 +76,12 @@ class RegisterTravelServiceDescribeSpec : DescribeSpec({
             cityId = "existsId",
             startedAt = LocalDateTime.now().minusDays(1),
             endedAt = LocalDateTime.now().minusMinutes(5),
+        )
+
+        private val correctCommand = RegisterTravelService.RegisterTravelCommand(
+            cityId = "existsId",
+            startedAt = LocalDateTime.now().minusDays(1),
+            endedAt = LocalDateTime.now().plusDays(1),
         )
     }
 }
