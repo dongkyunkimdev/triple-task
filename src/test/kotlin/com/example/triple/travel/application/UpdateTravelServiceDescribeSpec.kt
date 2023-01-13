@@ -51,6 +51,18 @@ class UpdateTravelServiceDescribeSpec : DescribeSpec({
                         }
                     }
                 }
+
+                context("종료일시가 현재 일시의 이전인 command가 주어지면") {
+                    every { mockTravelPersistencePort.findTravelById("existsTravelId") } answers {
+                        Travel(City("anyCityName"), startedIsAfterEndedCommand.startedAt, startedIsAfterEndedCommand.endedAt)
+                    }
+                    every { mockCityPersistencePort.findCityById("notExistsCityId") } answers { City("anyCityName") }
+                    it("IllegalArgumentException 발생") {
+                        shouldThrow<IllegalArgumentException> {
+                            updateTravelService.command(nowIsAfterEndedCommand)
+                        }
+                    }
+                }
             }
         }
     }
@@ -75,6 +87,13 @@ class UpdateTravelServiceDescribeSpec : DescribeSpec({
             cityId = "existsCityId",
             startedAt = LocalDateTime.now().plusDays(1),
             endedAt = LocalDateTime.now(),
+        )
+
+        private val nowIsAfterEndedCommand = UpdateTravelService.UpdateTravelCommand(
+            id = "existsTravelId",
+            cityId = "existsCityId",
+            startedAt = LocalDateTime.now().minusDays(1),
+            endedAt = LocalDateTime.now().minusMinutes(5),
         )
     }
 }
