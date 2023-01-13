@@ -23,4 +23,10 @@ class Travel(
     @Column(name = "ended_at", nullable = false)
     var endedAt: LocalDateTime = endedAt
         protected set
+
+    init {
+        require(LocalDateTime.now().isBefore(endedAt) && startedAt.isBefore(endedAt)) {
+            "The end date of the trip must be a future date"
+        }
+    }
 }
