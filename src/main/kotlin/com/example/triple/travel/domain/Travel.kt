@@ -2,6 +2,7 @@ package com.example.triple.travel.domain
 
 import com.example.triple.city.domain.City
 import com.example.triple.common.entity.JpaAuditEntity
+import com.example.triple.travel.application.UpdateTravelService
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -28,5 +29,14 @@ class Travel(
         require(LocalDateTime.now().isBefore(endedAt) && startedAt.isBefore(endedAt)) {
             "The end date of the trip must be a future date"
         }
+    }
+
+    fun update(command: UpdateTravelService.UpdateTravelCommand, city: City) {
+        if (LocalDateTime.now().isBefore(command.endedAt) && command.startedAt.isBefore(command.endedAt)) {
+            throw IllegalArgumentException("The end date of the trip must be a future date")
+        }
+        this.city = city
+        startedAt = command.startedAt
+        endedAt = command.endedAt
     }
 }
