@@ -44,7 +44,7 @@ class UpdateTravelServiceDescribeSpec : DescribeSpec({
                     every { mockTravelPersistencePort.findTravelById("existsTravelId") } answers {
                         Travel(City("anyCityName"), startedIsAfterEndedCommand.startedAt, startedIsAfterEndedCommand.endedAt)
                     }
-                    every { mockCityPersistencePort.findCityById("notExistsCityId") } answers { City("anyCityName") }
+                    every { mockCityPersistencePort.findCityById("existsCityId") } answers { City("anyCityName") }
                     it("IllegalArgumentException 발생") {
                         shouldThrow<IllegalArgumentException> {
                             updateTravelService.command(startedIsAfterEndedCommand)
@@ -54,9 +54,9 @@ class UpdateTravelServiceDescribeSpec : DescribeSpec({
 
                 context("종료일시가 현재 일시의 이전인 command가 주어지면") {
                     every { mockTravelPersistencePort.findTravelById("existsTravelId") } answers {
-                        Travel(City("anyCityName"), startedIsAfterEndedCommand.startedAt, startedIsAfterEndedCommand.endedAt)
+                        Travel(City("anyCityName"), nowIsAfterEndedCommand.startedAt, nowIsAfterEndedCommand.endedAt)
                     }
-                    every { mockCityPersistencePort.findCityById("notExistsCityId") } answers { City("anyCityName") }
+                    every { mockCityPersistencePort.findCityById("existsCityId") } answers { City("anyCityName") }
                     it("IllegalArgumentException 발생") {
                         shouldThrow<IllegalArgumentException> {
                             updateTravelService.command(nowIsAfterEndedCommand)
