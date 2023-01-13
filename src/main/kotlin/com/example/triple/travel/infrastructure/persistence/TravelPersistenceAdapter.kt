@@ -3,7 +3,9 @@ package com.example.triple.travel.infrastructure.persistence
 import com.example.triple.travel.application.TravelPersistencePort
 import com.example.triple.travel.domain.Travel
 import com.example.triple.travel.infrastructure.persistence.jpa.TravelRepository
+import org.springframework.stereotype.Component
 
+@Component
 class TravelPersistenceAdapter(
     private val travelRepository: TravelRepository
 ) : TravelPersistencePort {
