@@ -10,4 +10,6 @@ class CityPersistenceAdapter(
     private val cityRepository: CityRepository
 ) : CityPersistencePort {
     override fun findCityById(id: String): City? = cityRepository.findCityById(id)
+    override fun existsCityByName(name: String): Boolean = cityRepository.existsCityByName(name)
+    override fun save(city: City): City = cityRepository.save(city)
 }

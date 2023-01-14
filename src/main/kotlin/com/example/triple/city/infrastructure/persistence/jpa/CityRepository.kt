@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface CityRepository : JpaRepository<City, String> {
     fun findCityById(id: String): City?
+    fun existsCityByName(name: String): Boolean
 }
