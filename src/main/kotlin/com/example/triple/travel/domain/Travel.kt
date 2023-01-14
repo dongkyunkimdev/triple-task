@@ -10,11 +10,16 @@ import javax.persistence.*
 @Table(name = "travels")
 class Travel(
     city: City,
+    userId: String,
     startedAt: LocalDateTime,
     endedAt: LocalDateTime
 ) : JpaAuditEntity() {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     var city: City = city
+        protected set
+
+    @Column(name = "user_id", unique = true, nullable = false)
+    var userId: String = userId
         protected set
 
     @Column(name = "started_at", nullable = false)

@@ -37,6 +37,7 @@ class UpdateTravelController(
     data class UpdateTravelResponseDto(
         val cityInfo: CityInfo,
         val id: String,
+        val userId: String,
         val startedAt: LocalDateTime,
         val endedAt: LocalDateTime
     ) {
@@ -45,6 +46,7 @@ class UpdateTravelController(
                 UpdateTravelResponseDto(
                     cityInfo = CityResponseDto.from(info.cityInfo),
                     id = info.id,
+                    userId = info.userId,
                     startedAt = info.startedAt,
                     endedAt = info.endedAt
                 )

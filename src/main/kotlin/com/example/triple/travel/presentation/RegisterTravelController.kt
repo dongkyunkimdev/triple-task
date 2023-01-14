@@ -22,11 +22,13 @@ class RegisterTravelController(
 
     data class RegisterTravelRequestDto(
         val cityId: String,
+        val userId: String,
         val startedAt: LocalDateTime,
         val endedAt: LocalDateTime
     ) {
         fun toCommand(): RegisterTravelService.RegisterTravelCommand = RegisterTravelService.RegisterTravelCommand(
             cityId = cityId,
+            userId = userId,
             startedAt = startedAt,
             endedAt = endedAt,
         )
@@ -35,6 +37,7 @@ class RegisterTravelController(
     data class RegisterTravelResponseDto(
         val cityInfo: CityInfo,
         val id: String,
+        val userId: String,
         val startedAt: LocalDateTime,
         val endedAt: LocalDateTime
     ) {
@@ -43,6 +46,7 @@ class RegisterTravelController(
                 RegisterTravelResponseDto(
                     cityInfo = CityResponseDto.from(info.cityInfo),
                     id = info.id,
+                    userId = info.userId,
                     startedAt = info.startedAt,
                     endedAt = info.endedAt
                 )

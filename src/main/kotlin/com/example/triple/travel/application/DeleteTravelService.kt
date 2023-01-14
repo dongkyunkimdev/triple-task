@@ -27,6 +27,7 @@ class DeleteTravelService(
     data class DeleteTravelInfo(
         val cityInfo: CityInfo,
         val id: String,
+        val userId: String,
         val startedAt: LocalDateTime,
         val endedAt: LocalDateTime
     ) {
@@ -34,6 +35,7 @@ class DeleteTravelService(
             fun from(travel: Travel): DeleteTravelInfo = DeleteTravelInfo(
                 cityInfo = CityInfo.from(travel.city),
                 id = travel.getId(),
+                userId = travel.userId,
                 startedAt = travel.startedAt,
                 endedAt = travel.endedAt
             )

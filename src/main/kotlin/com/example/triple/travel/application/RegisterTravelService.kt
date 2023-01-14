@@ -1,9 +1,9 @@
 package com.example.triple.travel.application
 
 import com.example.triple.city.application.CityPersistencePort
+import com.example.triple.city.application.exception.CityNotFoundException
 import com.example.triple.city.domain.City
 import com.example.triple.travel.application.dto.CityInfo
-import com.example.triple.city.application.exception.CityNotFoundException
 import com.example.triple.travel.domain.Travel
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -29,12 +29,14 @@ class RegisterTravelService(
         command: RegisterTravelCommand
     ): Travel = Travel(
         city = savedCity,
+        userId = command.userId,
         startedAt = command.startedAt,
         endedAt = command.endedAt
     )
 
     data class RegisterTravelCommand(
         val cityId: String,
+        val userId: String,
         val startedAt: LocalDateTime,
         val endedAt: LocalDateTime
     )
@@ -42,6 +44,7 @@ class RegisterTravelService(
     data class RegisterTravelInfo(
         val cityInfo: CityInfo,
         val id: String,
+        val userId: String,
         val startedAt: LocalDateTime,
         val endedAt: LocalDateTime
     ) {
@@ -49,6 +52,7 @@ class RegisterTravelService(
             fun from(travel: Travel): RegisterTravelInfo = RegisterTravelInfo(
                 cityInfo = CityInfo.from(travel.city),
                 id = travel.getId(),
+                userId = travel.userId,
                 startedAt = travel.startedAt,
                 endedAt = travel.endedAt
             )

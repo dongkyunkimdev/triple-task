@@ -22,6 +22,7 @@ class GetTravelController(
     data class GetTravelResponseDto(
         val cityInfo: CityInfo,
         val id: String,
+        val userId: String,
         val startedAt: LocalDateTime,
         val endedAt: LocalDateTime
     ) {
@@ -30,6 +31,7 @@ class GetTravelController(
                 GetTravelResponseDto(
                     cityInfo = CityResponseDto.from(info.cityInfo),
                     id = info.id,
+                    userId = info.userId,
                     startedAt = info.startedAt,
                     endedAt = info.endedAt
                 )

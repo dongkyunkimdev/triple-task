@@ -30,6 +30,7 @@ class DeleteTravelController(
     data class DeleteTravelResponseDto(
         val cityInfo: CityInfo,
         val id: String,
+        val userId: String,
         val startedAt: LocalDateTime,
         val endedAt: LocalDateTime
     ) {
@@ -38,6 +39,7 @@ class DeleteTravelController(
                 DeleteTravelResponseDto(
                     cityInfo = CityResponseDto.from(info.cityInfo),
                     id = info.id,
+                    userId = info.userId,
                     startedAt = info.startedAt,
                     endedAt = info.endedAt
                 )
