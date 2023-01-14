@@ -13,4 +13,5 @@ class TravelPersistenceAdapter(
 ) : TravelPersistencePort {
     override fun save(travel: Travel): Travel = travelRepository.save(travel)
     override fun findTravelById(id: String): Travel? = travelRepositorySupport.findTravelById(id)
+    override fun deleteTravel(savedTravel: Travel) = travelRepository.delete(savedTravel)
 }
