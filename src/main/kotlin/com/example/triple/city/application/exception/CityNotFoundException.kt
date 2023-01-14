@@ -1,4 +1,4 @@
-package com.example.triple.travel.application.exception
+package com.example.triple.city.application.exception
 
 import com.example.triple.common.exception.BusinessException
 

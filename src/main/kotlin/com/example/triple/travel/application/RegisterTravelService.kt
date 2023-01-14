@@ -3,7 +3,7 @@ package com.example.triple.travel.application
 import com.example.triple.city.application.CityPersistencePort
 import com.example.triple.city.domain.City
 import com.example.triple.travel.application.dto.CityInfo
-import com.example.triple.travel.application.exception.CityNotFoundException
+import com.example.triple.city.application.exception.CityNotFoundException
 import com.example.triple.travel.domain.Travel
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
