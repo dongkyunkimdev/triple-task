@@ -1,5 +1,6 @@
 package com.example.triple.city.domain
 
+import com.example.triple.city.application.UpdateCityService
 import com.example.triple.common.entity.JpaAuditEntity
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -13,4 +14,8 @@ class City(
     @Column(name = "name", unique = true, nullable = false)
     var name: String = name
         protected set
+
+    fun update(command: UpdateCityService.UpdateCityCommand) {
+        name = command.name
+    }
 }
