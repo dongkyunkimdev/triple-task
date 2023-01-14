@@ -18,7 +18,7 @@ class Travel(
     var city: City = city
         protected set
 
-    @Column(name = "user_id", unique = true, nullable = false)
+    @Column(name = "user_id", nullable = false)
     var userId: String = userId
         protected set
 
