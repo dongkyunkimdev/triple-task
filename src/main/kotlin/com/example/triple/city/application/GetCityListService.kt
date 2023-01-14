@@ -16,11 +16,7 @@ class GetCityListService(
         val getCityInfoList = mutableListOf<GetCityInfo>()
 
         val savedCityStatisticList =
-            travelPersistencePort.findTravelByUserIdAndStartedAtGreaterThanEqualAndEndedAtLessThanEqual(
-                command.userId,
-                LocalDateTime.now(),
-                LocalDateTime.now()
-            )
+            travelPersistencePort.findTravelByUserIdAndBetweenStartedAtAndEndedAt(command.userId)
         getCityInfoList.addAll(savedCityStatisticList.stream().map { GetCityInfo.from(it.city) }.toList())
 //
 //        travelPersistencePort.findTravelByUserId(command.userId)

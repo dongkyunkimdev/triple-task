@@ -24,11 +24,7 @@ class TravelRepositorySupport(
 //            .innerJoin(QTravel.travel.city, QCity.city)
         emptyList()
 
-    fun findTravelByUserIdAndStartedAtGreaterThanEqualAndEndedAtLessThanEqual(
-        userId: String,
-        now: LocalDateTime,
-        now1: LocalDateTime
-    ): List<Travel> =
+    fun findTravelByUserIdAndStartedAtGreaterThanEqualAndEndedAtLessThanEqual(userId: String): List<Travel> =
         queryFactory.selectFrom(QTravel.travel)
             .where(
                 QTravel.travel.userId.eq(userId)

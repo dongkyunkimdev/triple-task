@@ -5,7 +5,6 @@ import com.example.triple.travel.domain.Travel
 import com.example.triple.travel.infrastructure.persistence.jpa.TravelRepository
 import com.example.triple.travel.infrastructure.persistence.querydsl.TravelRepositorySupport
 import org.springframework.stereotype.Component
-import java.time.LocalDateTime
 
 @Component
 class TravelPersistenceAdapter(
@@ -17,10 +16,6 @@ class TravelPersistenceAdapter(
     override fun deleteTravel(savedTravel: Travel) = travelRepository.delete(savedTravel)
     override fun existsTravelByCityId(id: String): Boolean = travelRepository.existsTravelByCityId(id)
     override fun findTravelByUserId(userId: String): List<Travel> = travelRepositorySupport.findTravelByUserId(userId)
-    override fun findTravelByUserIdAndStartedAtGreaterThanEqualAndEndedAtLessThanEqual(
-        userId: String,
-        now: LocalDateTime,
-        now1: LocalDateTime
-    ): List<Travel> =
-        travelRepositorySupport.findTravelByUserIdAndStartedAtGreaterThanEqualAndEndedAtLessThanEqual(userId, now, now1)
+    override fun findTravelByUserIdAndBetweenStartedAtAndEndedAt(userId: String): List<Travel> =
+        travelRepositorySupport.findTravelByUserIdAndStartedAtGreaterThanEqualAndEndedAtLessThanEqual(userId)
 }
