@@ -23,4 +23,12 @@ class CityStatistic(
     @Column(name = "user_id", nullable = false)
     var userId: String = userId
         protected set
+
+    @Column(name = "view", nullable = false)
+    var view: Long = 0
+        protected set
+
+    fun view() {
+        view++
+    }
 }
