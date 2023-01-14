@@ -6,4 +6,5 @@ interface CityPersistencePort {
     fun findCityById(id: String): City?
     fun existsCityByName(name: String): Boolean
     fun save(city: City): City
+    fun delete(city: City)
 }

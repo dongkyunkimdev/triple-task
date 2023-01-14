@@ -12,4 +12,5 @@ class CityPersistenceAdapter(
     override fun findCityById(id: String): City? = cityRepository.findCityById(id)
     override fun existsCityByName(name: String): Boolean = cityRepository.existsCityByName(name)
     override fun save(city: City): City = cityRepository.save(city)
+    override fun delete(city: City) = cityRepository.delete(city)
 }
