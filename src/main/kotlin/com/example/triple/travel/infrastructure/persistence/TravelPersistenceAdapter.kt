@@ -15,7 +15,4 @@ class TravelPersistenceAdapter(
     override fun findTravelById(id: String): Travel? = travelRepositorySupport.findTravelById(id)
     override fun deleteTravel(savedTravel: Travel) = travelRepository.delete(savedTravel)
     override fun existsTravelByCityId(id: String): Boolean = travelRepository.existsTravelByCityId(id)
-    override fun findTravelByUserId(userId: String): List<Travel> = travelRepositorySupport.findTravelByUserId(userId)
-    override fun findTravelByUserIdAndBetweenStartedAtAndEndedAt(userId: String): List<Travel> =
-        travelRepositorySupport.findTravelByUserIdAndStartedAtGreaterThanEqualAndEndedAtLessThanEqual(userId)
 }

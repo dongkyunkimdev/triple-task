@@ -21,4 +21,6 @@ class CityPersistenceAdapter(
 
     override fun findCityStatisticByCityIdAndUserId(cityId: String, userId: String): CityStatistic? =
         cityStatisticRepository.findCityStatisticByCityIdAndUserId(cityId, userId)
+
+    override fun findAllCity(): List<City> = cityRepository.findAll()
 }

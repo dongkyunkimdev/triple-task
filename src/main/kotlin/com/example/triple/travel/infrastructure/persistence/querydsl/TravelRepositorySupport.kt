@@ -5,7 +5,6 @@ import com.example.triple.travel.domain.QTravel
 import com.example.triple.travel.domain.Travel
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository
-import java.time.LocalDateTime
 
 @Repository
 class TravelRepositorySupport(
@@ -17,23 +16,4 @@ class TravelRepositorySupport(
             .innerJoin(QTravel.travel.city, QCity.city)
             .fetchJoin()
             .fetchOne()
-
-    fun findTravelByUserId(userId: String): List<Travel> =
-//        queryFactory.selectFrom(QTravel.travel)
-//            .where(QTravel.travel.userId.eq(userId))
-//            .innerJoin(QTravel.travel.city, QCity.city)
-        emptyList()
-
-    fun findTravelByUserIdAndStartedAtGreaterThanEqualAndEndedAtLessThanEqual(userId: String): List<Travel> =
-        queryFactory.selectFrom(QTravel.travel)
-            .where(
-                QTravel.travel.userId.eq(userId)
-                    .and(
-                        QTravel.travel.startedAt.before(LocalDateTime.now())
-                            .and(QTravel.travel.endedAt.after(LocalDateTime.now()))
-                    )
-            )
-            .innerJoin(QTravel.travel.city, QCity.city)
-            .fetchJoin()
-            .fetch()
 }

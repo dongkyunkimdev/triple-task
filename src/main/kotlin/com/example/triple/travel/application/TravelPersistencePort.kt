@@ -7,6 +7,4 @@ interface TravelPersistencePort {
     fun findTravelById(id: String): Travel?
     fun deleteTravel(savedTravel: Travel)
     fun existsTravelByCityId(id: String): Boolean
-    fun findTravelByUserId(userId: String): List<Travel>
-    fun findTravelByUserIdAndBetweenStartedAtAndEndedAt(userId: String): List<Travel>
 }

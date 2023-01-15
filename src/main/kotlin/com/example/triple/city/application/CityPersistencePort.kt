@@ -10,4 +10,5 @@ interface CityPersistencePort {
     fun delete(city: City)
     fun saveCityStatistic(cityStatistic: CityStatistic): CityStatistic
     fun findCityStatisticByCityIdAndUserId(cityId: String, userId: String): CityStatistic?
+    fun findAllCity(): List<City>
 }
