@@ -3,7 +3,6 @@ package com.example.triple.travel.presentation
 import com.example.triple.travel.application.UpdateTravelService
 import com.example.triple.travel.application.dto.CityInfo
 import com.example.triple.travel.presentation.dto.CityResponseDto
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.RequestBody
