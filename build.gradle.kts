@@ -37,6 +37,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.kotest:kotest-runner-junit5-jvm:${property("kotestVersion")}")
 	testImplementation("io.kotest:kotest-assertions-core-jvm:${property("kotestVersion")}")
+	testImplementation("io.kotest.extensions:kotest-extensions-spring:${property("kotestVersion")}")
 	testImplementation("io.mockk:mockk:${property("mockkVersion")}")
 }
 
