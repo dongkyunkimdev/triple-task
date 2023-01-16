@@ -1,7 +1,9 @@
 package com.example.triple.city.presentation
 
+import com.example.triple.city.application.exception.CityNotFoundException
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.jayway.jsonpath.JsonPath
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -39,6 +41,19 @@ class UpdateCityControllerTest {
                 MockMvcResultMatchers.status().isOk,
                 MockMvcResultMatchers.jsonPath("name").value(existsIdDto["name"])
             )
+    }
+
+    @Test
+    @DisplayName("도시 정보 수정 API 실패, id가 존재하지 않음")
+    fun update_city_fail_id_not_found() {
+        // given
+        val notExistsIdDto = hashMapOf("id" to "notExistsId", "name" to "updatedName")
+
+        // when
+        val expectedException = Assertions.assertThatThrownBy { patchRequest("/city", notExistsIdDto) }
+
+        // then
+        expectedException.cause.isInstanceOf(CityNotFoundException::class.java)
     }
 
     private fun postRequest(requestUrl: String, content: Map<String, String>): ResultActions =
