@@ -1,7 +1,9 @@
 package com.example.triple.city.presentation
 
+import com.example.triple.city.application.exception.CityNotFoundException
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.jayway.jsonpath.JsonPath
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -41,6 +43,19 @@ class DeleteCityControllerTest {
                 MockMvcResultMatchers.status().isOk,
                 MockMvcResultMatchers.jsonPath("name").value("notDuplicatedName")
             )
+    }
+
+    @Test
+    @DisplayName("도시 정보 삭제 API 실패, id가 존재하지 않음")
+    fun delete_city_fail_id_not_found() {
+        // given
+        val existsIdDto = hashMapOf("id" to "notExistsId")
+
+        // when
+        val expectedException = Assertions.assertThatThrownBy { deleteRequest("/city", existsIdDto) }
+
+        // then
+        expectedException.cause.isInstanceOf(CityNotFoundException::class.java)
     }
 
     private fun postRequest(requestUrl: String, content: Map<String, String>): ResultActions =
