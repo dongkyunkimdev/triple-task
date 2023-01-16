@@ -14,9 +14,11 @@ import org.springframework.test.web.servlet.ResultActions
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class RegisterCityControllerTest {
     @Autowired
     private lateinit var mvc: MockMvc
@@ -26,6 +28,7 @@ class RegisterCityControllerTest {
 
     @Test
     @DisplayName("도시 등록 API 성공")
+    @Transactional
     fun register_city_success() {
         // given
         val notDuplicatedDto = hashMapOf("name" to "notDuplicatedName")
@@ -41,8 +44,9 @@ class RegisterCityControllerTest {
             )
     }
 
-    @Test()
+    @Test
     @DisplayName("도시 등록에 실패, 이름이 중복됨")
+    @Transactional
     fun register_city_fail_duplicated_name() {
         // given
         val duplicatedDto = hashMapOf("name" to "duplicatedName")

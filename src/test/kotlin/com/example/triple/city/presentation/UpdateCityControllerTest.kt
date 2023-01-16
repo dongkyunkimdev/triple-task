@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultActions
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -26,6 +27,7 @@ class UpdateCityControllerTest {
 
     @Test
     @DisplayName("도시 정보 수정 API 성공")
+    @Transactional
     fun update_city_success() {
         // given
         val result = postRequest("/city", hashMapOf("name" to "notDuplicatedName")).andReturn()
