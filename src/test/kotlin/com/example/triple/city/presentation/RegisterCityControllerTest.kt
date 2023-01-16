@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 @SpringBootTest
 @AutoConfigureMockMvc
 class RegisterCityControllerTest {
-
     @Autowired
     private lateinit var mvc: MockMvc
 
