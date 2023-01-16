@@ -1,7 +1,9 @@
 package com.example.triple.city.presentation
 
+import com.example.triple.city.application.exception.CityNotFoundException
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.jayway.jsonpath.JsonPath
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultActions
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -24,6 +27,7 @@ class GetCityControllerTest {
 
     @Test
     @DisplayName("도시 단일 정보 조회 API 성공")
+    @Transactional
     fun get_city_success() {
         // given
         val result = postRequest("/city", hashMapOf("name" to "notDuplicatedName")).andReturn()
@@ -35,6 +39,16 @@ class GetCityControllerTest {
         // then
         actions
             .andExpect(MockMvcResultMatchers.status().isOk)
+    }
+
+    @Test
+    @DisplayName("도시 단일 정보 조회 API 실패, id가 존재하지 않음")
+    fun get_city_fail_id_not_found() {
+        // when
+        val expectedException = Assertions.assertThatThrownBy { getRequest("/city/notExistsId?userId=anyUser") }
+
+        // then
+        expectedException.cause.isInstanceOf(CityNotFoundException::class.java)
     }
 
     private fun getRequest(requestUrl: String): ResultActions =
