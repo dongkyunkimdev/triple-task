@@ -24,8 +24,8 @@ class RegisterCityControllerTest {
     private lateinit var objectMapper: ObjectMapper
 
     @Test
-    @DisplayName("도시 등록에 실패, 이름이 중복됨")
-    fun register_city_fail_duplicated_name() {
+    @DisplayName("도시 등록 API 성공")
+    fun register_city_success() {
         // given
         val notDuplicatedDto = hashMapOf("name" to "notDuplicatedName")
 
