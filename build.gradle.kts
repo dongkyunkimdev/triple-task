@@ -16,8 +16,6 @@ repositories {
 	mavenCentral()
 }
 
-extra["kotestVersion"] = "5.5.4"
-extra["mockkVersion"] = "1.13.2"
 extra["querydslVersion"] = "5.0.0"
 
 dependencies {
@@ -35,10 +33,6 @@ dependencies {
 	runtimeOnly("com.h2database:h2")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("io.kotest:kotest-runner-junit5-jvm:${property("kotestVersion")}")
-	testImplementation("io.kotest:kotest-assertions-core-jvm:${property("kotestVersion")}")
-	testImplementation("io.kotest.extensions:kotest-extensions-spring:${property("kotestVersion")}")
-	testImplementation("io.mockk:mockk:${property("mockkVersion")}")
 }
 
 tasks.withType<KotlinCompile> {
